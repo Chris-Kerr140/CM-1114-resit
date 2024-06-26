@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Website</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="register.html">Register</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="schedule.html">Schedule</a></li>
+      <li><a href="social.html">Social Media</a></li>
+    </ul>
+  </nav>
+  <div class="container">
+    <!-- Page-specific content goes here -->
+  </div>
+  <script src="js/script.js"></script>
+</body>
+</html>
+
+
+
+<div class="gallery">
+    <img src="image1.jpg" alt="Product 1" class="zoomable">
+    <!-- Repeat for other images -->
+  </div>
+  <style>
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .zoomable {
+      transition: transform 0.2s;
+    }
+    .zoomable:hover {
+      transform: scale(1.2);
+    }
+  </style>
+  <script>
+    document.querySelectorAll('.zoomable').forEach(img => {
+      img.addEventListener('click', function() {
+        alert('Image clicked: ' + this.alt);
+      });
+    });
+  </script>
+  
