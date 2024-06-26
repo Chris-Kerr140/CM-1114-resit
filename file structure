@@ -1,0 +1,11 @@
+/project-directory
+  /css
+    - styles.css
+  /js
+    - script.js
+  - index.html
+  - register.html
+  - gallery.html
+  - schedule.html
+  - social.html
+  - README.md
