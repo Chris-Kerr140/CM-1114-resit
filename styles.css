@@ -13,7 +13,13 @@ body {
 
 /* Navigation Menu */
 nav {
-  background-color: #800080; /* Purple background */
+  position: fixed;
+  top:0;
+  width: 100%;
+  padding: 10px 10px;
+  box-sizing: border-box;
+  background-color: #800080;
+  color; #fff;
   display: flex;
   align-items: center;
   padding: 10px 20px;
