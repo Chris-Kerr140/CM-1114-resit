@@ -16,7 +16,7 @@ nav {
   background-color: #800080; /* Purple background */
   display: flex;
   align-items: center;
-  padding: 10px 0;
+  padding: 10px 20px;
 }
 
 nav ul {
@@ -36,7 +36,7 @@ nav ul li a {
   display: block;
   color: white; /* White text */
   text-decoration: none;
-  padding: 14px 20px;
+  padding: 10px 20px;
   transition: background-color 0.3s, color 0.3s;
 }
 
@@ -46,8 +46,8 @@ nav ul li a:hover {
 }
 
 nav .logo {
-  margin-left: 5px;
-  height: 5px; /* Adjust based on your logo size */
+  margin-right: auto;
+  height: 40px; /* Adjust based on your logo size */
 }
 
 /* Home Page */
