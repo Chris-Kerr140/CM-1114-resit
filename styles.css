@@ -46,8 +46,8 @@ nav ul li a:hover {
 }
 
 nav .logo {
-  margin-left: 1px;
-  height: 1px;
+  margin-left: 5px;
+  height: 5px; /* Adjust based on your logo size */
 }
 
 /* Home Page */
