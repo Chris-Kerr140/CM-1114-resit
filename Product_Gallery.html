@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RGU R US - Products</title>
+  <title>RGU R US - Product Gallery</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <header>
+    <img src="images/rgu logo.jpg"  alt="logo" class="logo">
   <nav>
     <ul>
       <li><a href="index.html">Home</a></li>
@@ -16,15 +18,8 @@
       <li><a href="social_media.html">Social Media</a></li>
     </ul>
   </nav>
-  <div class="container">
-    <!-- Page-specific content goes here -->
-  </div>
-  <script src="js/script.js"></script>
-</body>
-</html>
-
-
-
+</header>
+<main>
 <div class="gallery">
   <img src="images/tour1.jpg" alt="Product 1" class="zoomable">
   <img src="path/to/image2.jpg" alt="Product 2" class="zoomable">
@@ -36,24 +31,8 @@
   <img src="path/to/image8.jpg" alt="Product 8" class="zoomable">
   <img src="path/to/image9.jpg" alt="Product 9" class="zoomable">
   </div>
-  <style>
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-    .zoomable {
-      transition: transform 0.2s;
-    }
-    .zoomable:hover {
-      transform: scale(1.2);
-    }
-  </style>
-  <script>
-    document.querySelectorAll('.zoomable').forEach(img => {
-      img.addEventListener('click', function() {
-        alert('Image clicked: ' + this.alt);
-      });
-    });
-  </script>
+  </main>
+  <script src="script.js"></script>
+  </body>
+</html>
   
