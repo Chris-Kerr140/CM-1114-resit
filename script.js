@@ -1,10 +1,20 @@
-//carousel
+//carousel//
+let slideIndex = 0;
+showSlides();
 
-$(document).ready(function() {
-    $('#videoCarousel').carousel({
-        interval: 3000 // Change the interval if needed
-    });
-});
+function showSlides() {
+    let slides = document.getElementsByClassName("slide");
+    for (let i = 0; i < slides.length; i++){
+        slides[i].computedStyleMap.display = "none";
+    }
+slideIndex++;
+if (slideIndex > slides.length) {
+    slideIndex = 1;
+}
+slides[slideIndex - 1].style.display = "block";
+setTimeout(showSlides,2000);
+}
+
 //registration form
 
 document.getElementById("registrationForm").addEventListener("submit", function(event) {
