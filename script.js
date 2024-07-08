@@ -36,7 +36,7 @@ $(document).ready(function() {
     }
 
     // Handle slide event to pause previous video
-     $('#videoCarousel').on('slide.bs.carousel', function(event) {
+    $('#videoCarousel').on('slide.bs.carousel', function(event) {
         console.log('Slide event triggered');
         var activeSlide = $('.carousel-item.active iframe')[0];
         if (activeSlide) {
@@ -51,7 +51,7 @@ $(document).ready(function() {
     // Handle slid event to play the current video
     $('#videoCarousel').on('slid.bs.carousel', function(event) {
         console.log('Slid event triggered');
-        var currentSlide = $(event.relatedTarget);
+        var currentSlide = $('.carousel-item.active');
         var iframe = currentSlide.find('iframe')[0];
         if (iframe) {
             var iframeID = iframe.id;
@@ -64,14 +64,15 @@ $(document).ready(function() {
 
     // Button click events to manually control carousel slides
     $('#btnPrev').click(function() {
+        console.log('Prev button clicked');
         $('#videoCarousel').carousel('prev');
     });
 
     $('#btnNext').click(function() {
+        console.log('Next button clicked');
         $('#videoCarousel').carousel('next');
     });
 });
-
 
 // Registration form validation (assuming this script is included after the form in HTML)
 document.getElementById("registrationForm").addEventListener("submit", function(event) {
