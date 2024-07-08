@@ -9,13 +9,10 @@ $(document).ready(function() {
 
     // Function to initialize YouTube players
     window.onYouTubeIframeAPIReady = function() {
-        console.log('YouTube API ready');
-
-        // Assign unique IDs to iframes and initialize players
         $('.carousel-item iframe').each(function(index) {
+            var iframe = $(this).get(0);
             var iframeID = 'video' + (index + 1);
-            $(this).attr('id', iframeID);
-            console.log('Initializing player for iframe ID:', iframeID);
+            $(iframe).attr('id', iframeID);
             players[iframeID] = new YT.Player(iframeID, {
                 events: {
                     'onReady': onPlayerReady
@@ -25,42 +22,68 @@ $(document).ready(function() {
 
         // Initialize Bootstrap carousel after YouTube API is loaded
         $('#videoCarousel').carousel({
-            interval: false, // Disable automatic cycling
-            wrap: true // Allow carousel to wrap
+            interval: 1000, // Change the interval if desired
+            wrap: false // Prevent carousel from wrapping
         });
-    };
+    }
 
     // Function called when each player is ready
     function onPlayerReady(event) {
-        console.log('Player ready:', event.target.getIframe().id);
+        // Optional: Play first video when player is ready
+        // event.target.playVideo();
     }
 
-    // Handle slide event to pause previous video
+    // Handle slide event to pause previous video and play current video
     $('#videoCarousel').on('slide.bs.carousel', function(event) {
-        console.log('Slide event triggered');
-        var activeSlide = $(event.relatedTarget).siblings('.active').find('iframe')[0];
-        if (activeSlide) {
-            var activeIframeID = activeSlide.id;
-            if (players[activeIframeID] && typeof players[activeIframeID].pauseVideo === 'function') {
-                console.log('Pausing video:', activeIframeID);
-                players[activeIframeID].pauseVideo();
+        // Pause all videos before sliding
+        for (var playerID in players) {
+            if (players.hasOwnProperty(playerID)) {
+                var player = players[playerID];
+                if (typeof player.pauseVideo === 'function') {
+                    player.pauseVideo();
+                }
             }
+        }
+
+        // Play video in the current slide
+        var currentSlide = $(event.relatedTarget);
+        var iframe = currentSlide.find('iframe').get(0);
+        var iframeID = iframe.id;
+
+        if (players[iframeID] && typeof players[iframeID].playVideo === 'function') {
+            players[iframeID].playVideo();
         }
     });
 
-    // Handle slid event to play the current video
-    $('#videoCarousel').on('slid.bs.carousel', function(event) {
-        console.log('Slid event triggered');
-        var currentSlide = $('.carousel-item.active');
-        var iframe = currentSlide.find('iframe')[0];
-        if (iframe) {
-            var iframeID = iframe.id;
-            if (players[iframeID] && typeof players[iframeID].playVideo === 'function') {
-                console.log('Playing video:', iframeID);
-                players[iframeID].playVideo();
-            }
-        }
+    // Button click events to manually control carousel slides
+    $('#btnPrev').click(function() {
+        $('#videoCarousel').carousel('prev');
     });
+
+    $('#btnNext').click(function() {
+        $('#videoCarousel').carousel('next');
+    });
+});
+
+// Registration form validation (assuming this script is included after the form in HTML)
+document.getElementById("registrationForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    if (email && password) {
+        alert("Registration Successful!");
+    } else {
+        alert("Please fill in all fields");
+    }
+});
+
+// Product gallery click event
+let products = document.getElementsByClassName("product");
+for (let product of products) {
+    product.addEventListener("click", function() {
+        alert("Product selected: " + this.alt);
+    });
+}
 
     // Button click events to manually control carousel slides
     $('#btnPrev').click(function() {
@@ -72,9 +95,6 @@ $(document).ready(function() {
         console.log('Next button clicked');
         $('#videoCarousel').carousel('next');
     });
-});
-
-
     // Button click events to manually control carousel slides
     $('#btnPrev').click(function() {
         console.log('Prev button clicked');
@@ -85,7 +105,6 @@ $(document).ready(function() {
         console.log('Next button clicked');
         $('#videoCarousel').carousel('next');
     });
-});
 
 // Registration form validation (assuming this script is included after the form in HTML)
 document.getElementById("registrationForm").addEventListener("submit", function(event) {
