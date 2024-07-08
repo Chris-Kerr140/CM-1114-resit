@@ -1,6 +1,5 @@
 $(document).ready(function() {
     var players = {}; // To store YouTube players
-    var playerReady = false; // Flag to indicate if players are ready
 
     // Load YouTube IFrame Player API code asynchronously.
     var tag = document.createElement('script');
@@ -19,9 +18,6 @@ $(document).ready(function() {
                 }
             });
         });
-
-        // Set flag indicating players are ready
-        playerReady = true;
 
         // Initialize Bootstrap carousel after YouTube API is loaded
         $('#videoCarousel').carousel({
@@ -61,7 +57,6 @@ $(document).ready(function() {
     // When the document is ready, try to initialize the YouTube API
     window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
 });
-
 // Registration form validation (assuming this script is included after the form in HTML)
 document.getElementById("registrationForm").addEventListener("submit", function(event) {
     event.preventDefault();
