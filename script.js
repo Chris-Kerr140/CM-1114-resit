@@ -38,7 +38,7 @@ $(document).ready(function() {
     // Handle slide event to pause previous video
     $('#videoCarousel').on('slide.bs.carousel', function(event) {
         console.log('Slide event triggered');
-        var activeSlide = $('.carousel-item.active iframe')[0];
+        var activeSlide = $(event.relatedTarget).siblings('.active').find('iframe')[0];
         if (activeSlide) {
             var activeIframeID = activeSlide.id;
             if (players[activeIframeID] && typeof players[activeIframeID].pauseVideo === 'function') {
@@ -61,6 +61,19 @@ $(document).ready(function() {
             }
         }
     });
+
+    // Button click events to manually control carousel slides
+    $('#btnPrev').click(function() {
+        console.log('Prev button clicked');
+        $('#videoCarousel').carousel('prev');
+    });
+
+    $('#btnNext').click(function() {
+        console.log('Next button clicked');
+        $('#videoCarousel').carousel('next');
+    });
+});
+
 
     // Button click events to manually control carousel slides
     $('#btnPrev').click(function() {
