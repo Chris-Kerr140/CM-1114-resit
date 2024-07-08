@@ -1,7 +1,7 @@
 // Initialize Bootstrap carousel
 $(document).ready(function() {
     $('#videoCarousel').carousel({
-        interval: 3000 // Change the interval if desired
+        interval: 10000 // Change the interval if desired
     });
 });
 
