@@ -1,14 +1,15 @@
 $(document).ready(function() {
+    var players = {}; // To store YouTube players
+    var playerReady = false; // Flag to indicate if players are ready
+
     // Load YouTube IFrame Player API code asynchronously.
     var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    var players = {}; // To store YouTube players
-    var playerReady = false; // Flag to indicate if players are ready
-
-    window.onYouTubeIframeAPIReady = function() {
+    // Function to initialize YouTube players
+    function onYouTubeIframeAPIReady() {
         // Initialize YouTube players for each iframe
         $('.carousel-item iframe').each(function() {
             var iframeID = this.id;
@@ -27,47 +28,38 @@ $(document).ready(function() {
             interval: 10000, // Change the interval if desired
             wrap: false // Prevent carousel from wrapping
         });
-    };
+    }
 
+    // Function called when each player is ready
     function onPlayerReady(event) {
         // Optional: Play first video when player is ready
         // event.target.playVideo();
     }
 
-    // Pause all videos when the slide changes
+    // Handle slide event to pause previous video and play current video
     $('#videoCarousel').on('slide.bs.carousel', function(event) {
-        if (playerReady) {
-            // Pause all videos before sliding
-            $('.carousel-item').each(function() {
-                var iframe = $(this).find('iframe')[0];
-                var iframeID = iframe.id;
-
-                if (players[iframeID]) {
-                    players[iframeID].pauseVideo();
+        // Pause all videos before sliding
+        for (var playerID in players) {
+            if (players.hasOwnProperty(playerID)) {
+                var player = players[playerID];
+                if (typeof player.pauseVideo === 'function') {
+                    player.pauseVideo();
                 }
-            });
-
-            // Play video in the current slide
-            var currentSlide = $(event.relatedTarget);
-            var iframe = currentSlide.find('iframe')[0];
-            var iframeID = iframe.id;
-
-            if (players[iframeID]) {
-                players[iframeID].playVideo();
             }
         }
-    });
 
-    // Handle initial slide to play video in the first slide
-    $('#videoCarousel').on('slid.bs.carousel', function(event) {
+        // Play video in the current slide
         var currentSlide = $(event.relatedTarget);
         var iframe = currentSlide.find('iframe')[0];
         var iframeID = iframe.id;
 
-        if (players[iframeID]) {
+        if (players[iframeID] && typeof players[iframeID].playVideo === 'function') {
             players[iframeID].playVideo();
         }
     });
+
+    // When the document is ready, try to initialize the YouTube API
+    window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
 });
 
 // Registration form validation (assuming this script is included after the form in HTML)
