@@ -1,20 +1,21 @@
 $(document).ready(function() {
-    // Initialize Bootstrap carousel
-    $('#videoCarousel').carousel({
-        interval: 10000 // Change the interval if desired
-    });
-
     // Load YouTube IFrame Player API code asynchronously.
     var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    // This function creates an <iframe> (and YouTube player) after the API code downloads.
-    var players = {};
+    var players = {}; // To store YouTube players
+
     window.onYouTubeIframeAPIReady = function() {
+        // Initialize Bootstrap carousel
+        $('#videoCarousel').carousel({
+            interval: 10000 // Change the interval if desired
+        });
+
+        // Initialize YouTube players for each iframe
         $('.carousel-item iframe').each(function() {
-            var iframeID = $(this).attr('id');
+            var iframeID = this.id;
             players[iframeID] = new YT.Player(iframeID, {
                 events: {
                     'onReady': onPlayerReady
@@ -37,6 +38,7 @@ $(document).ready(function() {
         }
     });
 });
+
 
 // Registration form validation
 document.getElementById("registrationForm").addEventListener("submit", function(event) {
