@@ -38,14 +38,18 @@ $(document).ready(function() {
 
     // Pause all videos in the carousel
     function pauseAllVideos() {
-        videos.forEach(video => video.player.pauseVideo());
+        videos.forEach(video => {
+            if (video.player && typeof video.player.pauseVideo === 'function') {
+                video.player.pauseVideo();
+            }
+        });
     }
 
     // Handle slide event to pause previous video and play current video
     $('#videoCarousel').on('slide.bs.carousel', function(event) {
         const slideTo = $(event.relatedTarget).index();
         pauseAllVideos();
-        if (videos[slideTo]) {
+        if (videos[slideTo] && videos[slideTo].player && typeof videos[slideTo].player.playVideo === 'function') {
             videos[slideTo].player.playVideo();
         }
     });
