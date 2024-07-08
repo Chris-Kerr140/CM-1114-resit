@@ -60,6 +60,7 @@ $(document).ready(function() {
     });
 });
 
+
 // Registration form validation (assuming this script is included after the form in HTML)
 document.getElementById("registrationForm").addEventListener("submit", function(event) {
     event.preventDefault();
