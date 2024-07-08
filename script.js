@@ -54,6 +54,17 @@ $(document).ready(function() {
             }
         }
     });
+
+    // Handle initial slide to play video in the first slide
+    $('#videoCarousel').on('slid.bs.carousel', function(event) {
+        var currentSlide = $(event.relatedTarget);
+        var iframe = currentSlide.find('iframe')[0];
+        var iframeID = iframe.id;
+
+        if (players[iframeID]) {
+            players[iframeID].playVideo();
+        }
+    });
 });
 
 // Registration form validation (assuming this script is included after the form in HTML)
