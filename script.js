@@ -14,7 +14,7 @@ $(document).ready(function() {
     var players = {};
     window.onYouTubeIframeAPIReady = function() {
         $('.carousel-item iframe').each(function() {
-            var iframeID = this.id;
+            var iframeID = $(this).attr('id');
             players[iframeID] = new YT.Player(iframeID, {
                 events: {
                     'onReady': onPlayerReady
@@ -30,19 +30,16 @@ $(document).ready(function() {
 
     // Stop video when the slide changes
     $('#videoCarousel').on('slide.bs.carousel', function(event) {
-        var $prevSlide = $(event.relatedTarget).prev();
-        var $nextSlide = $(event.relatedTarget).next();
-        var $slides = $prevSlide.add($nextSlide);
+        var $slide = $(event.relatedTarget);
+        var $iframe = $slide.find('iframe');
+        var iframeID = $iframe.attr('id');
 
-        $slides.each(function() {
-            var $this = $(this);
-            var $iframe = $this.find('iframe');
-            var iframeID = $iframe.attr('id');
-
-            if (players[iframeID]) {
-                players[iframeID].stopVideo();
+        // Pause the previous video
+        for (var key in players) {
+            if (key !== iframeID) {
+                players[key].pauseVideo();
             }
-        });
+        }
     });
 });
 
