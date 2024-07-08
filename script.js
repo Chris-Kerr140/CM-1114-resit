@@ -14,20 +14,36 @@ $(document).ready(function() {
     var players = {};
     window.onYouTubeIframeAPIReady = function() {
         $('.carousel-item iframe').each(function() {
-            var iframeID = $(this).attr('id');
-            players[iframeID] = new YT.Player(iframeID);
-        });
-
-        // Stop video when the slide changes
-        $('#videoCarousel').on('slide.bs.carousel', function(event) {
-            var $prevSlide = $(event.relatedTarget).siblings('.active');
-            var $prevIframe = $prevSlide.find('iframe');
-            var prevId = $prevIframe.attr('id');
-            if (players[prevId]) {
-                players[prevId].stopVideo();
-            }
+            var iframeID = this.id;
+            players[iframeID] = new YT.Player(iframeID, {
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
         });
     };
+
+    function onPlayerReady(event) {
+        // Optional: Play first video when player is ready
+        // event.target.playVideo();
+    }
+
+    // Stop video when the slide changes
+    $('#videoCarousel').on('slide.bs.carousel', function(event) {
+        var $prevSlide = $(event.relatedTarget).prev();
+        var $nextSlide = $(event.relatedTarget).next();
+        var $slides = $prevSlide.add($nextSlide);
+
+        $slides.each(function() {
+            var $this = $(this);
+            var $iframe = $this.find('iframe');
+            var iframeID = $iframe.attr('id');
+
+            if (players[iframeID]) {
+                players[iframeID].stopVideo();
+            }
+        });
+    });
 });
 
 // Registration form validation
