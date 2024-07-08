@@ -22,7 +22,7 @@ $(document).ready(function() {
 
         // Initialize Bootstrap carousel after YouTube API is loaded
         $('#videoCarousel').carousel({
-            interval: 1000, // Change the interval if desired
+            interval: 10000, // Change the interval if desired
             wrap: false // Prevent carousel from wrapping
         });
     }
@@ -64,47 +64,6 @@ $(document).ready(function() {
         $('#videoCarousel').carousel('next');
     });
 });
-
-// Registration form validation (assuming this script is included after the form in HTML)
-document.getElementById("registrationForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
-    if (email && password) {
-        alert("Registration Successful!");
-    } else {
-        alert("Please fill in all fields");
-    }
-});
-
-// Product gallery click event
-let products = document.getElementsByClassName("product");
-for (let product of products) {
-    product.addEventListener("click", function() {
-        alert("Product selected: " + this.alt);
-    });
-}
-
-    // Button click events to manually control carousel slides
-    $('#btnPrev').click(function() {
-        console.log('Prev button clicked');
-        $('#videoCarousel').carousel('prev');
-    });
-
-    $('#btnNext').click(function() {
-        console.log('Next button clicked');
-        $('#videoCarousel').carousel('next');
-    });
-    // Button click events to manually control carousel slides
-    $('#btnPrev').click(function() {
-        console.log('Prev button clicked');
-        $('#videoCarousel').carousel('prev');
-    });
-
-    $('#btnNext').click(function() {
-        console.log('Next button clicked');
-        $('#videoCarousel').carousel('next');
-    });
 
 // Registration form validation (assuming this script is included after the form in HTML)
 document.getElementById("registrationForm").addEventListener("submit", function(event) {
