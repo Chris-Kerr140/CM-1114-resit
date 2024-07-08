@@ -54,8 +54,19 @@ $(document).ready(function() {
         }
     });
 
+    // Button click events to manually control carousel slides
+    $('#btnPrev').click(function() {
+        $('#videoCarousel').carousel('prev');
+    });
+
+    $('#btnNext').click(function() {
+        $('#videoCarousel').carousel('next');
+    });
+
     // When the document is ready, try to initialize the YouTube API
     window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+});
+
 });
 // Registration form validation (assuming this script is included after the form in HTML)
 document.getElementById("registrationForm").addEventListener("submit", function(event) {
