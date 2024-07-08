@@ -3,32 +3,31 @@ $(document).ready(function() {
     $('#videoCarousel').carousel({
         interval: 10000 // Change the interval if desired
     });
+
+    // Load YouTube IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // This function creates an <iframe> (and YouTube player) after the API code downloads.
+    var players = {};
+    window.onYouTubeIframeAPIReady = function() {
+        $('.carousel-item iframe').each(function() {
+            var iframeID = $(this).attr('id');
+            players[iframeID] = new YT.Player(iframeID);
+        });
+
+        // Stop video when the slide changes
+        $('#videoCarousel').on('slide.bs.carousel', function(event) {
+            var $prevSlide = $(event.from);
+            var prevId = $prevSlide.find('iframe').attr('id');
+            if (players[prevId]) {
+                players[prevId].stopVideo();
+            }
+        });
+    };
 });
-
-// YouTube API script to stop videos when sliding
-function onYouTubeIframeAPIReady() {
-    var players = [];
-    $('.carousel-item').each(function() {
-        var $this = $(this);
-        var id = $this.find('iframe').attr('id');
-        players[id] = new YT.Player(id);
-    });
-
-    $('#videoCarousel').on('slide.bs.carousel', function(event) {
-        var $currentSlide = $(event.relatedTarget);
-        var $prevSlide = $(event.from);
-        var prevId = $prevSlide.find('iframe').attr('id');
-        if (players[prevId]) {
-            players[prevId].stopVideo();
-        }
-    });
-}
-
-// Load YouTube API script
-var tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 // Registration form validation
 document.getElementById("registrationForm").addEventListener("submit", function(event) {
