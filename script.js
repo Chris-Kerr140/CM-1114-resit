@@ -38,11 +38,14 @@ $(document).ready(function() {
     $('#videoCarousel').on('slide.bs.carousel', function(event) {
         if (playerReady) {
             // Pause all videos before sliding
-            for (var playerID in players) {
-                if (players.hasOwnProperty(playerID)) {
-                    players[playerID].pauseVideo();
+            $('.carousel-item').each(function() {
+                var iframe = $(this).find('iframe')[0];
+                var iframeID = iframe.id;
+
+                if (players[iframeID]) {
+                    players[iframeID].pauseVideo();
                 }
-            }
+            });
 
             // Play video in the current slide
             var currentSlide = $(event.relatedTarget);
