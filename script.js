@@ -24,7 +24,7 @@ $(document).ready(function() {
             interval: false, // Disable automatic cycling
             wrap: true // Allow carousel to wrap
         });
-    }
+    };
 
     // Function called when each player is ready
     function onPlayerReady(event) {
@@ -32,27 +32,26 @@ $(document).ready(function() {
         // event.target.playVideo();
     }
 
-    // Handle slide event to pause previous video and play current video
+    // Handle slide event to pause previous video
     $('#videoCarousel').on('slide.bs.carousel', function(event) {
-        // Pause all videos before sliding
-        for (var playerID in players) {
-            if (players.hasOwnProperty(playerID)) {
-                var player = players[playerID];
-                if (typeof player.pauseVideo === 'function') {
-                    player.pauseVideo();
-                }
+        var activeSlide = $('.carousel-item.active iframe')[0];
+        if (activeSlide) {
+            var activeIframeID = activeSlide.id;
+            if (players[activeIframeID] && typeof players[activeIframeID].pauseVideo === 'function') {
+                players[activeIframeID].pauseVideo();
             }
         }
     });
 
+    // Handle slid event to play the current video
     $('#videoCarousel').on('slid.bs.carousel', function(event) {
-        // Play video in the current slide
         var currentSlide = $(event.relatedTarget);
         var iframe = currentSlide.find('iframe')[0];
-        var iframeID = iframe.id;
-
-        if (players[iframeID] && typeof players[iframeID].playVideo === 'function') {
-            players[iframeID].playVideo();
+        if (iframe) {
+            var iframeID = iframe.id;
+            if (players[iframeID] && typeof players[iframeID].playVideo === 'function') {
+                players[iframeID].playVideo();
+            }
         }
     });
 
@@ -65,6 +64,7 @@ $(document).ready(function() {
         $('#videoCarousel').carousel('next');
     });
 });
+
 
 });
 // Registration form validation (assuming this script is included after the form in HTML)
