@@ -21,7 +21,7 @@ $(document).ready(function() {
 
         // Initialize Bootstrap carousel after YouTube API is loaded
         $('#videoCarousel').carousel({
-            interval: 10000, // Change the interval if desired
+            interval: 1000, // Change the interval if desired
             wrap: false // Prevent carousel from wrapping
         });
     }
@@ -54,6 +54,9 @@ $(document).ready(function() {
         }
     });
 
+    // When the document is ready, try to initialize the YouTube API
+    window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+
     // Button click events to manually control carousel slides
     $('#btnPrev').click(function() {
         $('#videoCarousel').carousel('prev');
@@ -62,11 +65,7 @@ $(document).ready(function() {
     $('#btnNext').click(function() {
         $('#videoCarousel').carousel('next');
     });
-
-    // When the document is ready, try to initialize the YouTube API
-    window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
 });
-
 });
 // Registration form validation (assuming this script is included after the form in HTML)
 document.getElementById("registrationForm").addEventListener("submit", function(event) {
