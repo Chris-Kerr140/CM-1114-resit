@@ -36,7 +36,8 @@ $(document).ready(function() {
     }
 
     // Handle slide event to pause previous video
-    $('#videoCarousel').on('slide.bs.carousel', function(event) {
+     $('#videoCarousel').on('slide.bs.carousel', function(event) {
+        console.log('Slide event triggered');
         var activeSlide = $('.carousel-item.active iframe')[0];
         if (activeSlide) {
             var activeIframeID = activeSlide.id;
@@ -49,6 +50,7 @@ $(document).ready(function() {
 
     // Handle slid event to play the current video
     $('#videoCarousel').on('slid.bs.carousel', function(event) {
+        console.log('Slid event triggered');
         var currentSlide = $(event.relatedTarget);
         var iframe = currentSlide.find('iframe')[0];
         if (iframe) {
