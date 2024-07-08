@@ -9,9 +9,13 @@ $(document).ready(function() {
 
     // Function to initialize YouTube players
     window.onYouTubeIframeAPIReady = function() {
-        // Initialize YouTube players for each iframe
-        $('.carousel-item iframe').each(function() {
-            var iframeID = this.id;
+        console.log('YouTube API ready');
+
+        // Assign unique IDs to iframes and initialize players
+        $('.carousel-item iframe').each(function(index) {
+            var iframeID = 'video' + (index + 1);
+            $(this).attr('id', iframeID);
+            console.log('Initializing player for iframe ID:', iframeID);
             players[iframeID] = new YT.Player(iframeID, {
                 events: {
                     'onReady': onPlayerReady
@@ -28,8 +32,7 @@ $(document).ready(function() {
 
     // Function called when each player is ready
     function onPlayerReady(event) {
-        // Optional: Play first video when player is ready
-        // event.target.playVideo();
+        console.log('Player ready:', event.target.getIframe().id);
     }
 
     // Handle slide event to pause previous video
@@ -38,6 +41,7 @@ $(document).ready(function() {
         if (activeSlide) {
             var activeIframeID = activeSlide.id;
             if (players[activeIframeID] && typeof players[activeIframeID].pauseVideo === 'function') {
+                console.log('Pausing video:', activeIframeID);
                 players[activeIframeID].pauseVideo();
             }
         }
@@ -49,21 +53,8 @@ $(document).ready(function() {
         var iframe = currentSlide.find('iframe')[0];
         if (iframe) {
             var iframeID = iframe.id;
-            if (players[iframeID] && typeof players[iframeID].playVideo === 'function') {
-                players[iframeID].playVideo();
-            }
-        }
-    });
+            if (players[iframeID] && typeof players[iframeID].playVideo === 'func
 
-    // Button click events to manually control carousel slides
-    $('#btnPrev').click(function() {
-        $('#videoCarousel').carousel('prev');
-    });
-
-    $('#btnNext').click(function() {
-        $('#videoCarousel').carousel('next');
-    });
-});
 // Registration form validation (assuming this script is included after the form in HTML)
 document.getElementById("registrationForm").addEventListener("submit", function(event) {
     event.preventDefault();
