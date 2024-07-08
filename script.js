@@ -20,8 +20,9 @@ $(document).ready(function() {
 
         // Stop video when the slide changes
         $('#videoCarousel').on('slide.bs.carousel', function(event) {
-            var $prevSlide = $(event.from);
-            var prevId = $prevSlide.find('iframe').attr('id');
+            var $prevSlide = $(event.relatedTarget).siblings('.active');
+            var $prevIframe = $prevSlide.find('iframe');
+            var prevId = $prevIframe.attr('id');
             if (players[prevId]) {
                 players[prevId].stopVideo();
             }
