@@ -22,7 +22,7 @@ $(document).ready(function() {
         // Initialize Bootstrap carousel after YouTube API is loaded
         $('#videoCarousel').carousel({
             interval: 1000, // Change the interval if desired
-            wrap: false // Prevent carousel from wrapping
+            wrap: true // Prevent carousel from wrapping
         });
     }
 
