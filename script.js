@@ -1,5 +1,5 @@
-// Initialize Bootstrap carousel
 $(document).ready(function() {
+    // Initialize Bootstrap carousel
     $('#videoCarousel').carousel({
         interval: 10000 // Change the interval if desired
     });
@@ -28,16 +28,11 @@ $(document).ready(function() {
         // event.target.playVideo();
     }
 
-    // Stop video when the slide changes
+    // Pause all videos when the slide changes
     $('#videoCarousel').on('slide.bs.carousel', function(event) {
-        var $slide = $(event.relatedTarget);
-        var $iframe = $slide.find('iframe');
-        var iframeID = $iframe.attr('id');
-
-        // Pause the previous video
-        for (var key in players) {
-            if (key !== iframeID) {
-                players[key].pauseVideo();
+        for (var player in players) {
+            if (players.hasOwnProperty(player)) {
+                players[player].pauseVideo();
             }
         }
     });
