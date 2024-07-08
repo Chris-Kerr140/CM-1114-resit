@@ -47,6 +47,11 @@ nav ul li a:hover {
   margin: 0 auto;
 }
 
+.carousel-item {
+  display: flex;
+  justify-content: center;
+}  
+
 .carousel-control-prev-icon, .carousel-control-next-icon {
   background-color: #4b0082;
   border-radius: 50%;
