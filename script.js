@@ -38,9 +38,9 @@ $(document).ready(function() {
     $('#videoCarousel').on('slide.bs.carousel', function(event) {
         if (playerReady) {
             // Pause all videos before sliding
-            for (var player in players) {
-                if (players.hasOwnProperty(player)) {
-                    players[player].pauseVideo();
+            for (var playerID in players) {
+                if (players.hasOwnProperty(playerID)) {
+                    players[playerID].pauseVideo();
                 }
             }
 
