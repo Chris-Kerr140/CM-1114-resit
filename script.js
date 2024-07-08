@@ -6,6 +6,7 @@ $(document).ready(function() {
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
     var players = {}; // To store YouTube players
+    var playerReady = false; // Flag to indicate if players are ready
 
     window.onYouTubeIframeAPIReady = function() {
         // Initialize YouTube players for each iframe
@@ -17,6 +18,9 @@ $(document).ready(function() {
                 }
             });
         });
+
+        // Set flag indicating players are ready
+        playerReady = true;
 
         // Initialize Bootstrap carousel after YouTube API is loaded
         $('#videoCarousel').carousel({
@@ -32,43 +36,27 @@ $(document).ready(function() {
 
     // Pause all videos when the slide changes
     $('#videoCarousel').on('slide.bs.carousel', function(event) {
-        var $prevSlide = $(event.relatedTarget).prev();
-        var $nextSlide = $(event.relatedTarget).next();
-        var $slides = $prevSlide.add($nextSlide);
+        if (playerReady) {
+            // Pause all videos before sliding
+            for (var player in players) {
+                if (players.hasOwnProperty(player)) {
+                    players[player].pauseVideo();
+                }
+            }
 
-        $slides.each(function() {
-            var $this = $(this);
-            var $iframe = $this.find('iframe');
-            var iframeID = $iframe.attr('id');
+            // Play video in the current slide
+            var currentSlide = $(event.relatedTarget);
+            var iframe = currentSlide.find('iframe')[0];
+            var iframeID = iframe.id;
 
             if (players[iframeID]) {
-                players[iframeID].pauseVideo();
+                players[iframeID].playVideo();
             }
-        });
+        }
     });
 });
 
 // Registration form validation (assuming this script is included after the form in HTML)
-document.getElementById("registrationForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
-    if (email && password) {
-        alert("Registration Successful!");
-    } else {
-        alert("Please fill in all fields");
-    }
-});
-
-// Product gallery click event
-let products = document.getElementsByClassName("product");
-for (let product of products) {
-    product.addEventListener("click", function() {
-        alert("Product selected: " + this.alt);
-    });
-}
-
-// Registration form validation
 document.getElementById("registrationForm").addEventListener("submit", function(event) {
     event.preventDefault();
     let email = document.getElementById("email").value;
