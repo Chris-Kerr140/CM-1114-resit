@@ -8,7 +8,7 @@ $(document).ready(function() {
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
     // Function to initialize YouTube players
-    function onYouTubeIframeAPIReady() {
+    window.onYouTubeIframeAPIReady = function() {
         // Initialize YouTube players for each iframe
         $('.carousel-item iframe').each(function() {
             var iframeID = this.id;
@@ -21,8 +21,8 @@ $(document).ready(function() {
 
         // Initialize Bootstrap carousel after YouTube API is loaded
         $('#videoCarousel').carousel({
-            interval: 1000, // Change the interval if desired
-            wrap: true // Prevent carousel from wrapping
+            interval: false, // Disable automatic cycling
+            wrap: true // Allow carousel to wrap
         });
     }
 
@@ -43,7 +43,9 @@ $(document).ready(function() {
                 }
             }
         }
+    });
 
+    $('#videoCarousel').on('slid.bs.carousel', function(event) {
         // Play video in the current slide
         var currentSlide = $(event.relatedTarget);
         var iframe = currentSlide.find('iframe')[0];
@@ -54,9 +56,6 @@ $(document).ready(function() {
         }
     });
 
-    // When the document is ready, try to initialize the YouTube API
-    window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
-
     // Button click events to manually control carousel slides
     $('#btnPrev').click(function() {
         $('#videoCarousel').carousel('prev');
@@ -66,6 +65,7 @@ $(document).ready(function() {
         $('#videoCarousel').carousel('next');
     });
 });
+
 });
 // Registration form validation (assuming this script is included after the form in HTML)
 document.getElementById("registrationForm").addEventListener("submit", function(event) {
