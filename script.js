@@ -1,7 +1,7 @@
 $(document).ready(function() {
-    const videos = []; // Array to store video players
+    const videos = [];
 
-    // Load YouTube IFrame Player API asynchronously
+    // Load Youtube player
     const tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     const firstScriptTag = document.getElementsByTagName('script')[0];
@@ -12,18 +12,16 @@ $(document).ready(function() {
         return new YT.Player(playerInfo.id, {
             videoId: playerInfo.videoId,
             playerVars: {
-                showinfo: 0, // Hide video information
-                autoplay: 0, // Do not autoplay
-                rel: 0, // Do not show related videos at the end
-                controls: 1, // Show player controls
-                modestbranding: 1 // Minimal branding
+                showinfo: 0,
+                autoplay: 0,
+                rel: 0,
+                controls: 1,
+                modestbranding: 1 
             },
         });
     }
 
-    // YouTube API callback function
     window.onYouTubeIframeAPIReady = function() {
-        // Initialize YouTube players for each iframe
         $('.carousel-item').each(function(index) {
             const video = $(this).find('iframe');
             if (video.length > 0) {
@@ -45,7 +43,7 @@ $(document).ready(function() {
         });
     }
 
-    // Handle slide event to pause previous video and play current video
+    //pauses previous video and play current video
     $('#videoCarousel').on('slide.bs.carousel', function(event) {
         const slideTo = $(event.relatedTarget).index();
         pauseAllVideos();
@@ -54,7 +52,7 @@ $(document).ready(function() {
         }
     });
 
-    // Button click events to manually control carousel slides
+    // Buttonevents to control carousel slides
     $('#btnPrev').click(function() {
         $('#videoCarousel').carousel('prev');
     });
@@ -82,11 +80,9 @@ document.getElementById("registrationForm").addEventListener("submit", function(
     let password = document.getElementById("password").value;
 
     if (validateEmail(email) && validatePassword(password)) {
-      // Form data is valid, simulate successful submission
       alert("Thank you for registering!");
        
     } else {
-      // Form data is invalid, show error message
       alert("Please fill in all fields correctly");
     } 
   });
