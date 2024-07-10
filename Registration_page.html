@@ -5,30 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RGU R US - Registration</title>
   <link rel="stylesheet" href="styles.css">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com;">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
 </head>
 <body>
   <header>
-    <img src="images/rgu logo.jpg"  alt="logo" class="logo">
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="Registration_page.html">Register</a></li>
-      <li><a href="Product_Gallery.html">Gallery</a></li>
-      <li><a href="Launch_schedule.html">Schedule</a></li>
-      <li><a href="social_media.html">Social Media</a></li>
-    </ul>
-  </nav>
-</header>
-<main>
-<form id="registrationForm">
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-    <button type="submit">Register</button>
-  </form>
+    <img src="images/rgu_logo.jpg" alt="logo" class="logo">
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="Registration_page.html">Register</a></li>
+        <li><a href="Product_Gallery.html">Gallery</a></li>
+        <li><a href="Launch_schedule.html">Schedule</a></li>
+        <li><a href="social_media.html">Social Media</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <form id="registrationForm" action="https://yourdomain.com/register" method="POST">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required minlength="8">
+      <button type="submit">Register</button>
+      <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY"></div>
+    </form>
+    <div id="error-message" style="display:none;">Invalid email or password.</div>
   </main>
   <script src="script.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 </html>
-  
