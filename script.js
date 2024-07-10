@@ -84,8 +84,7 @@ document.getElementById("registrationForm").addEventListener("submit", function(
     if (validateEmail(email) && validatePassword(password)) {
       // Form data is valid, simulate successful submission
       alert("Thank you for registering!");
-      setTimeout(function(){
-      document.getElementById("registrationForm").reset()},1000);       
+       
     } else {
       // Form data is invalid, show error message
       alert("Please fill in all fields correctly");
