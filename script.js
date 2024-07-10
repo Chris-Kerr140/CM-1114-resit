@@ -83,3 +83,6 @@ for (let product of products) {
         alert("Product selected: " + this.alt);
     });
 }
+function showAlert(productName) {
+    alert('Product selected: ' + productName);
+}
