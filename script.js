@@ -64,25 +64,54 @@ $(document).ready(function() {
     });
 });
 
-// Registration form validation (assuming this script is included after the form in HTML)
+// Registration formL
 document.getElementById("registrationForm").addEventListener("submit", function(event) {
     event.preventDefault();
+    
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
-    if (validateEmail && validatePassword) {
+    
+    if (validateEmail(email) && validatePassword(password)) {
+      // Form data is valid, proceed with submission
+      const formData = new FormData();
+      formData.append("email", email);
+      formData.append("password", password);
+      
+      fetch('https://your-serverless-function-endpoint', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Success:', data);
         alert("Registration Successful!");
+        // Optionally, redirect or perform additional actions upon successful registration
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert("Registration failed. Please try again later.");
+        // Handle error, e.g., show error message to user
+      });
+      
     } else {
-        alert("Please fill in all fields");
+      // Form data is invalid, show error message
+      alert("Please fill in all fields correctly");
     }
-});
-function validateEmail(email){
+  });
+  
+  function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
-}
-
-function validatePassword(password) {
-    return password.length >=6;
-}
+  }
+  
+  function validatePassword(password) {
+    return password.length >= 6;
+  }
 // Product gallery click event
 let products = document.getElementsByClassName("product");
 for (let product of products) {
