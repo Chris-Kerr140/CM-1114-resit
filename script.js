@@ -73,6 +73,7 @@ document.getElementById("registrationForm").addEventListener("submit", function(
     
     if (validateEmail(email) && validatePassword(password)) {
       // Form data is valid, simulate successful submission
+      console.log("Thank you for registering")
       alert("Thank you for registering!");
       document.getElementById("registrationForm").reset(); // Reset form fields
     } else {
