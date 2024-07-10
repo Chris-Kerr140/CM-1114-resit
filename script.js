@@ -8,7 +8,7 @@ $(document).ready(function() {
     const firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    // Function to create YouTube player instances
+    // Function to create YouTube player
     function createPlayer(playerInfo) {
         return new YT.Player(playerInfo.id, {
             videoId: playerInfo.videoId,
@@ -47,29 +47,29 @@ $(document).ready(function() {
         });
     }
 
-    // Handle YouTube player state changes
+
     function onPlayerStateChange(event) {
         if (event.data === YT.PlayerState.PLAYING && !carouselPaused) {
             $('#videoCarousel').carousel('pause');
             carouselPaused = true;
-        } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
-            if (carouselPaused) {
-                $('#videoCarousel').carousel('cycle');
-                carouselPaused = false;
-            }
+        } else if (carouselPaused && (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED)) {
+            $('#videoCarousel').carousel('cycle');
+            carouselPaused = false;
         }
     }
 
-    // Pause videos when carousel slide changes
     $('#videoCarousel').on('slide.bs.carousel', function(event) {
-        const slideTo = $(event.relatedTarget).index();
         pauseAllVideos();
+        const slideTo = $(event.relatedTarget).index();
+        if (carouselPaused) {
+            $('#videoCarousel').carousel('pause');
+        }
         if (videos[slideTo] && videos[slideTo].player && typeof videos[slideTo].player.playVideo === 'function') {
             videos[slideTo].player.playVideo();
         }
     });
 
-    // Button events to control carousel slides
+    // Buttonevents to change carousel
     $('#btnPrev').click(function() {
         $('#videoCarousel').carousel('prev');
     });
