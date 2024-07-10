@@ -75,6 +75,7 @@ function validateEmail(email) {
     return password.length >= 6;
   }
 document.getElementById("registrationForm").addEventListener("submit", function(event) {
+   console.log("form submission attempted");
     event.preventDefault();
     
     let email = document.getElementById("email").value;
