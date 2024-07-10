@@ -70,24 +70,24 @@ document.getElementById("registrationForm").addEventListener("submit", function(
     
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
-    
-      
-  function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-  }
-  
-  function validatePassword(password) {
-    return password.length >= 6;
-  }
+
     if (validateEmail(email) && validatePassword(password)) {
       // Form data is valid, simulate successful submission
       alert("Thank you for registering!");
-      document.getElementById("registrationForm").reset(); // Reset form fields
+      document.getElementById("registrationForm").reset(1000); // Reset form fields
     } else {
       // Form data is invalid, show error message
       alert("Please fill in all fields correctly");
-    }
+    } 
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+      }
+      
+      function validatePassword(password) {
+        return password.length >= 6;
+      }
+
   });
 
 // Product gallery click event
