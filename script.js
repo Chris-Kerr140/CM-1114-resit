@@ -69,13 +69,20 @@ document.getElementById("registrationForm").addEventListener("submit", function(
     event.preventDefault();
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
-    if (email && password) {
+    if (validateEmail && validatePassword) {
         alert("Registration Successful!");
     } else {
         alert("Please fill in all fields");
     }
 });
+function validateEmail(email){
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
 
+function validatePassword(password) {
+    return password.length >=6;
+}
 // Product gallery click event
 let products = document.getElementsByClassName("product");
 for (let product of products) {
