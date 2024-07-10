@@ -1,7 +1,8 @@
 $(document).ready(function() {
     const videos = [];
+    let carouselPaused = false;
 
-    // Load Youtube player
+    // Load YouTube player
     const tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     const firstScriptTag = document.getElementsByTagName('script')[0];
@@ -13,11 +14,14 @@ $(document).ready(function() {
             videoId: playerInfo.videoId,
             playerVars: {
                 showinfo: 0,
-                autoplay: 0,
                 rel: 0,
                 controls: 1,
-                modestbranding: 1 
+                modestbranding: 1,
+                enablejsapi: 1
             },
+            events: {
+                'onStateChange': onPlayerStateChange
+            }
         });
     }
 
@@ -43,7 +47,20 @@ $(document).ready(function() {
         });
     }
 
-    //pauses previous video and play current video
+    // Handle YouTube player state changes
+    function onPlayerStateChange(event) {
+        if (event.data === YT.PlayerState.PLAYING && !carouselPaused) {
+            $('#videoCarousel').carousel('pause');
+            carouselPaused = true;
+        } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
+            if (carouselPaused) {
+                $('#videoCarousel').carousel('cycle');
+                carouselPaused = false;
+            }
+        }
+    }
+
+    // Pause videos when carousel slide changes
     $('#videoCarousel').on('slide.bs.carousel', function(event) {
         const slideTo = $(event.relatedTarget).index();
         pauseAllVideos();
@@ -52,7 +69,7 @@ $(document).ready(function() {
         }
     });
 
-    // Buttonevents to control carousel slides
+    // Button events to control carousel slides
     $('#btnPrev').click(function() {
         $('#videoCarousel').carousel('prev');
     });
@@ -61,6 +78,7 @@ $(document).ready(function() {
         $('#videoCarousel').carousel('next');
     });
 });
+
 
 // Registration form
 
