@@ -71,17 +71,7 @@ document.getElementById("registrationForm").addEventListener("submit", function(
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
     
-    if (validateEmail(email) && validatePassword(password)) {
-      // Form data is valid, simulate successful submission
-      console.log("Thank you for registering")
-      alert("Thank you for registering!");
-      document.getElementById("registrationForm").reset(); // Reset form fields
-    } else {
-      // Form data is invalid, show error message
-      alert("Please fill in all fields correctly");
-    }
-  });
-  
+      
   function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
@@ -90,6 +80,16 @@ document.getElementById("registrationForm").addEventListener("submit", function(
   function validatePassword(password) {
     return password.length >= 6;
   }
+    if (validateEmail(email) && validatePassword(password)) {
+      // Form data is valid, simulate successful submission
+      alert("Thank you for registering!");
+      document.getElementById("registrationForm").reset(); // Reset form fields
+    } else {
+      // Form data is invalid, show error message
+      alert("Please fill in all fields correctly");
+    }
+  });
+
 // Product gallery click event
 let products = document.getElementsByClassName("product");
 for (let product of products) {
