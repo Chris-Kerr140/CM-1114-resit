@@ -62,7 +62,7 @@ nav ul li a:hover {
 .gallery img {
   width: 100%;
   height: auto;
-  max-height: 100px; /* Ensures images have a uniform height */
+  max-height: 200px; /* Ensures images have a uniform height */
   object-fit: cover; /* Ensures aspect ratio is maintained */
   transition: transform 0.2s;
 }
