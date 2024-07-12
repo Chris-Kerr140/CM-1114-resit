@@ -36,7 +36,7 @@ header {
   color: white;
   display: flex;
   align-items: center;
-  padding: 0px;
+  padding:  0px;
 }
 
 header img.logo {
@@ -66,7 +66,7 @@ nav ul li a {
 nav ul li a:hover {
   background-color: white;
   color: #4b0082;
-  border-radius: 5px;
+  border-radius: 20px;
 }
 
 .carousel-inner {
