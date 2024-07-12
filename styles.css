@@ -8,23 +8,23 @@ body {
 }
 
 body.index {
-  background-image: url('Backgrounds/Main campus entrance-angle1jpg');
+  background-image: url('Backgrounds/index.jpg');
 }
 
 body.Producuct_Gallery {
-  background-image: url('Backgrounds/deeview student stor (closed).jpg');
+  background-image: url('Backgrounds/product.jpg');
 }
 
 body.Registration_page {
-  background-image: url('Backgrounds/Ishbel Gordon buikding.jpg');
+  background-image: url('Backgrounds/registration.jpg');
 }
 
 body.launch-schedule {
-  background-image: url('Backgrounds/riverside main-far.jpg');
+  background-image: url('Backgrounds/launch.jpg');
 }
 
 body.social-media {
-  background-image: url('Backgrounds/sir ian wood - angle 2.jpg');
+  background-image: url('Backgrounds/social.jpg');
 }
 
 header {
