@@ -11,7 +11,7 @@ body.index {
   background-image: url('Backgrounds/index.jpg');
 }
 
-body.Producuct_Gallery {
+body.Product_Gallery {
   background-image: url('Backgrounds/product.jpg');
 }
 
@@ -19,7 +19,7 @@ body.Registration_page {
   background-image: url('Backgrounds/registration.jpg');
 }
 
-body.launch-schedule {
+body.launch {
   background-image: url('Backgrounds/launch.jpg');
 }
 
@@ -170,7 +170,7 @@ footer{
   color: white;
   text-align: center;
   padding: 10px;
-  position: fixed;
+  position: relative;
   bottom: 0;
   width: 100%;
   margin-top: auto;
