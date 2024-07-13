@@ -185,7 +185,7 @@ form button:hover {
   background-color: #3a0066;
 }
 .open {
-  max-width: 80%;
+  max-width: 100%;
   height:auto;
 }
 footer{
