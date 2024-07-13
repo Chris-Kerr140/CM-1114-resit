@@ -204,7 +204,7 @@ form button:hover {
 
 /* Open day image styles */
 .open {
-  max-width: 20%; /* Adjusted size */
+  max-width: 100%;
   height: auto;
 }
 
