@@ -85,25 +85,36 @@ $(document).ready(function() {
 function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
-  }
-  
-  function validatePassword(password) {
+}
+
+function validatePassword(password) {
     return password.length >= 6;
-  }
+}
+
 document.getElementById("registrationForm").addEventListener("submit", function(event) {
-   console.log("form submission attempted");
+    console.log("form submission attempted");
     event.preventDefault();
     
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
 
     if (validateEmail(email) && validatePassword(password)) {
-      alert("Thank you for registering!");
-       
+        alert("Thank you for registering!");
     } else {
-      alert("Please fill in all fields correctly");
-    } 
-  });
+        alert("Please fill in all fields correctly");
+    }
+});
+
+document.getElementById("unregisterButton").addEventListener("click", function() {
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    if (email !== "" && password !== "") {
+        alert("You have been unregistered.");
+    } else {
+        alert("Please enter your email and password to unregister.");
+    }
+});
 
 // Product gallery click event
 let products = document.getElementsByClassName("product");
