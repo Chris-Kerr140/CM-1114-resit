@@ -99,7 +99,7 @@ document.getElementById("registrationForm").addEventListener("submit", function(
     let password = document.getElementById("password").value;
 
     if (validateEmail(email) && validatePassword(password)) {
-        alert("Thank you for registering!");
+        alert("Thank you for registering!, to unregister please enter your details again and click unregister");
     } else {
         alert("Please fill in all fields correctly");
     }
