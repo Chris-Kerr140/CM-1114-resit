@@ -146,6 +146,7 @@ th, td {
   padding: 8px;
   text-align: left;
   background-color: white;
+  color: black;
 }
 
 th {
@@ -176,6 +177,7 @@ a:hover {
 /* Form styles */
 form {
   background: white;
+  color:black;
   padding: 20px;
   border: 1px solid white;
   border-radius: 5px;
